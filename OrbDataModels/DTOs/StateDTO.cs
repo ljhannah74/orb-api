@@ -1,6 +1,6 @@
 using System;
 
-namespace orb_api.DTOs;
+namespace OrbDataModels.DTOs;
 
 public class StateDTO
 {
