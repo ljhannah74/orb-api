@@ -7,14 +7,16 @@ namespace OrbDataModels.BLL;
 
 public class OrbBLL
 {
-    private readonly OrbDAL _resourceDAL;
+    private readonly OrbDAL _orbDAL;
     public OrbBLL(string connectionString)
     {
-        _resourceDAL = new OrbDAL(connectionString);
+        _orbDAL = new OrbDAL(connectionString);
     }
-    public List<StateDTO> GetAllStates() => _resourceDAL.GetAllStates();
+    public List<StateDTO> GetAllStates() => _orbDAL.GetAllStates();
 
-    public List<CountyDTO> GetCountiesByState(int StateID) => _resourceDAL.GetCountiesByState(StateID);
+    public List<CountyDTO> GetCountiesByState(int StateID) => _orbDAL.GetCountiesByState(StateID);
 
-    public OrbDTO GetOrbsByStateCounty(int StateID, int CountyID) => _resourceDAL.GetOrbByStateCounty(StateID, CountyID);
+    public OrbDTO GetOrbsByStateCounty(int StateID, int CountyID) => _orbDAL.GetOrbByStateCounty(StateID, CountyID);
+
+    public bool UpdateOrb(OrbDTO orbDto) => _orbDAL.UpdateOrb(orbDto);
 }
