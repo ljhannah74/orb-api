@@ -58,6 +58,7 @@ public class OrbDAL
             {
                 CountyDTO county = new CountyDTO
                 {
+                    StateID = (int)reader["StateID"],
                     CountyID = (int)reader["CountyID"],
                     CountyName = reader["CountyName"].ToString()
                 };
@@ -156,6 +157,81 @@ public class OrbDAL
             {
                 return null;
             }
+        }
+    }
+
+    public bool UpdateOrb(OrbDTO orbDto)
+    {
+        using (var connection = new MySqlConnection(_connectionString))
+        using (var command = new MySqlCommand("UpdateORB", connection))
+        {
+            command.Parameters.AddWithValue("@StateID", orbDto.StateID);
+            command.Parameters.AddWithValue("@CountyID", orbDto.CountyID);
+            command.Parameters.AddWithValue("@LastUpdate", orbDto.LastUpdate);
+            command.Parameters.AddWithValue("@CountyHomepage", (object)orbDto.CountyHomepage ?? DBNull.Value);
+            command.Parameters.AddWithValue("@SubNeed", (object)orbDto.SubNeed ?? DBNull.Value);
+            command.Parameters.AddWithValue("@WeSubscribe", (object)orbDto.WeSubscribe ?? DBNull.Value);
+            command.Parameters.AddWithValue("@SubTerm", (object)orbDto.SubTerm ?? DBNull.Value);
+            command.Parameters.AddWithValue("@SubFee", (object)orbDto.SubFee ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Tap", (object)orbDto.Tap ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Rv", (object)orbDto.Rv ?? DBNull.Value);
+            command.Parameters.AddWithValue("@DtreeDesk", (object)orbDto.DtreeDesk ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Ins", (object)orbDto.Ins ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Props", (object)orbDto.Props ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Copy", (object)orbDto.Copy ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CopyPmtMethod", (object)orbDto.CopyPmtMethod ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CopyFeeAmt", (object)orbDto.CopyFeeAmt ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CopySource", (object)orbDto.CopySource ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ImgDate", (object)orbDto.ImgDate ?? DBNull.Value);
+            command.Parameters.AddWithValue("@IndexDate", (object)orbDto.IndexDate ?? DBNull.Value);
+            command.Parameters.AddWithValue("@IndexSource", (object)orbDto.IndexSource ?? DBNull.Value);
+            command.Parameters.AddWithValue("@IndexPmtMethod", (object)orbDto.IndexPmtMethod ?? DBNull.Value);
+            command.Parameters.AddWithValue("@LandUrl", (object)orbDto.LandUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@LoginReq", (object)orbDto.LoginReq ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CountyUser", (object)orbDto.CountyUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CountyPwd", (object)orbDto.CountyPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@LandUrl2", (object)orbDto.LandUrl2 ?? DBNull.Value);
+            command.Parameters.AddWithValue("@LandUser2", (object)orbDto.LandUser2 ?? DBNull.Value);
+            command.Parameters.AddWithValue("@LandPwd2", (object)orbDto.LandPwd2 ?? DBNull.Value);
+            command.Parameters.AddWithValue("@AssessorUrl", (object)orbDto.AssessorUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@AssessorUser", (object)orbDto.AssessorUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@AssessorPwd", (object)orbDto.AssessorPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@TaxUrl", (object)orbDto.TaxUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@TaxUser", (object)orbDto.TaxUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@TaxPwd", (object)orbDto.TaxPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Tax2Url", (object)orbDto.Tax2Url ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Tax2User", (object)orbDto.Tax2User ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Tax2Pwd", (object)orbDto.Tax2Pwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@DelinqTaxUrl", (object)orbDto.DelinqTaxUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Tax3User", (object)orbDto.Tax3User ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Tax3Pwd", (object)orbDto.Tax3Pwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@UccUrl", (object)orbDto.UccUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@MuniCourtUrl", (object)orbDto.MuniCourtUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@MuniUser", (object)orbDto.MuniUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@MuniPwd", (object)orbDto.MuniPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ProthonUrl", (object)orbDto.ProthonUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ProUser", (object)orbDto.ProUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ProPwd", (object)orbDto.ProPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@SheriffUrl", (object)orbDto.SheriffUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CourtUrl", (object)orbDto.CourtUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CourtUser", (object)orbDto.CourtUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CourtPwd", (object)orbDto.CourtPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CourtImgDt", (object)orbDto.CourtImgDt ?? DBNull.Value);
+            command.Parameters.AddWithValue("@CourtIndexDt", (object)orbDto.CourtIndexDt ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ForeclosureUrl", (object)orbDto.ForeclosureUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ProbateUrl", (object)orbDto.ProbateUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ProbateUser", (object)orbDto.ProbateUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@ProbatePwd", (object)orbDto.ProbatePwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@MapUrl", (object)orbDto.MapUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@PlatUrl", (object)orbDto.PlatUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@OtherUrl", (object)orbDto.OtherUrl ?? DBNull.Value);
+            command.Parameters.AddWithValue("@OtherUser", (object)orbDto.OtherUser ?? DBNull.Value);
+            command.Parameters.AddWithValue("@OtherPwd", (object)orbDto.OtherPwd ?? DBNull.Value);
+            command.Parameters.AddWithValue("@Comments", (object)orbDto.Comments ?? DBNull.Value);
+
+            connection.Open();
+            var rowsAffected = command.ExecuteNonQuery();
+            return rowsAffected > 0;
         }
     }
 }
