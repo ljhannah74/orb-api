@@ -26,7 +26,24 @@ namespace orb_api.Controllers
         {
             var counties = _context.Orbs.Where(c => c.State == state).Select(c => c.County).ToList();
 
+            if(counties.Count == 0)
+            {
+                return NotFound();
+            }
             return Ok(counties);
+        }
+
+        [HttpGet("resources/{state}/{county}")]
+        public ActionResult<Orb> GetResources(string state, string county)
+        {
+            var resource = _context.Orbs.FirstOrDefault(c => c.State == state && c.County == county);
+
+            if(resource == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(resource);
         }
     }
 }
