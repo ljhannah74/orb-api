@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using orb_api.Models;
+
 namespace orb_api;
 
 public class Program
@@ -19,6 +22,11 @@ public class Program
                 builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
+        });
+
+        builder.Services.AddDbContext<OrbDatabaseContext>(options =>
+        {
+            options.UseSqlite(builder.Configuration.GetConnectionString("OrbDatabase"));
         });
 
         var app = builder.Build();
