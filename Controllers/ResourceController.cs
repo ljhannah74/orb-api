@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using orb_api.DTOs;
 using orb_api.Models;
 
@@ -19,13 +20,14 @@ namespace orb_api.Controllers
         [HttpGet("states")]
         public ActionResult<IEnumerable<string>> GetStates()
         {
-            return Ok(new string[] { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" });
+            return 
+                Ok(new string[] { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" });
         }
 
         [HttpGet("counties/{state}")]
-        public ActionResult<IEnumerable<string>> GetCounties(string state)
+        public async Task<ActionResult<IEnumerable<string>>> GetCounties(string state)
         {
-            var counties = _context.Orbs.Where(c => c.State == state).Select(c => c.County).ToList();
+            var counties = await _context.Orbs.Where(c => c.State == state).Select(c => c.County).ToListAsync();
 
             if (counties.Count == 0)
             {
@@ -35,13 +37,13 @@ namespace orb_api.Controllers
         }
 
         [HttpGet("resources/{state}/{county}")]
-        public ActionResult<OrbDTO> GetResources(string state, string county)
+        public async  Task<ActionResult<OrbDTO>> GetResources(string state, string county)
         {
             if (string.IsNullOrEmpty(state) || string.IsNullOrEmpty(county))
                 return BadRequest("State and County are required");
 
-            var orb = _context.Orbs
-                .FirstOrDefault(o => o.State == state && o.County == county);
+            var orb = await _context.Orbs
+                .FirstOrDefaultAsync(o => o.State == state && o.County == county);
 
             if (orb == null)
             {
