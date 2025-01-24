@@ -12,7 +12,7 @@ The **Online Resource Bank (ORB) API** is a backend service designed to manage a
 ## Prerequisites
 
 - [.NET 7 or later](https://dotnet.microsoft.com/download)
-- [MariaDB](https://mariadb.org/) as the database backend
+- [SQLite](https://sqlite.org/) as the database backend
 - A REST client like [Postman](https://www.postman.com/) or [cURL](https://curl.se/) for testing
 
 ## Installation
@@ -42,14 +42,14 @@ The **Online Resource Bank (ORB) API** is a backend service designed to manage a
 ## Endpoints
 
 ### Search
-- `GET /api/resource` - Get a list of all states.
-- `GET /api/resource/{stateId]` - Get a list of counties for state with id "stateId"
-- `GET /api/resource/{stateId}/{countyId}` - Get a list of all resources for county with "countyId" in state with "stateId"
+- `GET /api/states` - Get a list of all states.
+- `GET /api/counties/{state]` - Get a list of counties for the specified state
+- `GET /api/resources/{state}/{county}` - Get a list of all resources for the specified county in the given state.
 
 ### Resource Management
-- `POST /api/resource` - Add a new resource.
-- `PUT /api/resource/{id}` - Update an existing resource.
-- `DELETE /api/resource/{id}` - Delete a resource by ID.
+- `POST /api/resources` - Add a new resource.
+- `PUT /api/resources/{id}` - Update an existing resource.
+- `DELETE /api/resources/{id}` - Delete a resource by ID.
 
 ### Example Request
 ```http
